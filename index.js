@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const app = express()
 // set the port
 const port = 3000
+// importing queries
+const db = require('./queries')
 
 // the app constant has access to a #use function that accepts the middleware, which accepts a #json function
 app.use(bodyParser.json())
@@ -28,6 +30,9 @@ app.get('/', (request, response) => {
     }
   })
 })
+
+// if you get this, do this
+app.get('/users', db.getUsers)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

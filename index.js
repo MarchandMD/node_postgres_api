@@ -33,6 +33,7 @@ app.get('/', (request, response) => {
 
 // if you get this, do this
 app.get('/users', db.getUsers)
+app.get('/users/:id', db.getUserById)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)

@@ -24,6 +24,20 @@ const getUsers = (request, response) => {
   })
 }
 
-module.exports = {
-  getUsers
+const getUserById = (req, res) => {
+  const id = parseInt(req.params.id)
+
+  pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(results.rows)
+  })
 }
+
+// this is how these functions are "packaged" and exposed in scope to something else, specifically the index.js
+module.exports = {
+  getUsers,
+  getUserById
+}
+

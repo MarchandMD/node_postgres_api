@@ -40,18 +40,19 @@ const getUserById = (req, res) => {
 const createUser = (req, res) => {
   const { name, email } = req.body
 
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+  pool.query(
+    'INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id', [name, email], (error, results) => {
     if (error) {
       throw error
     }
-    res.status(201).send(`User added with ID: ${res.rows[0].id}`)
+    res.status(201).send(`User added with ID: ${results.rows[0].id}`)
   })
 }
 
 // constant/function to use when getting a POST request for /users/:id
 const updateUser = (req, res) => {
   const id = parseInt(req.params.id)
-  const { name, email } = request.body
+  const { name, email } = req.body
 
   pool.query(
     'UPDATE users SET name = $1, email = $2 WHERE id = $3',

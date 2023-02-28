@@ -31,7 +31,7 @@ app.get('/', (request, response) => {
   })
 })
 
-// if you get this, do this
+// if you get this, do this; I'm guessing there's also an app.post function
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
 

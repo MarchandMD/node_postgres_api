@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const app = express()
 // set the port
 const port = 3000
-// importing queries
+// this will import all from queries.js
 const db = require('./queries')
 
 // the app constant has access to a #use function that accepts the middleware, which accepts a #json function
@@ -34,6 +34,9 @@ app.get('/', (request, response) => {
 // if you get this, do this; I'm guessing there's also an app.post function
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
+app.post('/users', db.createUser)
+app.put('/users/:id', db.updateUser)
+app.delete('/users/:id', db.deleteUser)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
